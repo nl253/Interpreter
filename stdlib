@@ -1,0 +1,12 @@
+map = fn f xs => match xs
+                       @[]             []
+                       @[head ...tail] add< [f<head>] map<f tail> >
+
+reduce = fn f xs => match xs
+                          @[fst]             fst
+                          @[head ...tail] f<head reduce< f tail > >
+
+range = fn n m => match eq?<n m>
+                        @true  ([])
+                        @false (add< [ n ] (range< (add <n 1>) m >) >)
+
